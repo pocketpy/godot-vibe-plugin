@@ -37,6 +37,9 @@ func _resolve_base_url() -> String:
 
 
 func send(endpoint: String, payload: Dictionary):
+	if _http == null:
+		failed.emit("client not ready")
+		return
 	if _http.get_http_client_status() != HTTPClient.STATUS_DISCONNECTED:
 		failed.emit("a request is already in flight")
 		return
@@ -51,6 +54,8 @@ func send(endpoint: String, payload: Dictionary):
 
 
 func fetch_options():
+	if _options_http == null:
+		return
 	if _options_http.get_http_client_status() == HTTPClient.STATUS_DISCONNECTED:
 		_options_http.request(_base_url + "/options")
 

@@ -56,7 +56,7 @@ func _enter_tree():
 	}
 
 	_register_menus()
-	_client.fetch_options()
+	_client.fetch_options.call_deferred()
 
 
 func _exit_tree():
