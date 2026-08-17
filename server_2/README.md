@@ -91,14 +91,19 @@ Install dependencies:
 pip install -r requirements.txt
 ```
 
-Add a `server_2/.env` with your keys:
+Add a `server_2/.env` (see `.env.example`):
 
 ```
 PIXELLAB_API_KEY=your_key
 OPENAI_API_KEY=your_key
+OPENAI_API_BASE=https://api.openai.com/v1
+OPENAI_IMAGE_MODEL=gpt-image-1
+OPENAI_VISION_MODEL=gpt-4o-mini
+VIBE_HOST=0.0.0.0
+VIBE_PORT=1103
 ```
 
-Run the server (serves `http://127.0.0.1:8000`, the address the plugin expects):
+Run the server (binds `VIBE_HOST:VIBE_PORT`, default `0.0.0.0:1103`):
 
 ```bash
 python api.py
@@ -107,7 +112,7 @@ python api.py
 Then use the plugin from the Godot editor, or call it directly:
 
 ```bash
-curl -X POST http://127.0.0.1:8000/vibe/generate \
+curl -X POST http://127.0.0.1:1103/vibe/generate \
   -H 'Content-Type: application/json' \
   -d '{"prompt":"a rock block","folder":"output_test","width":16,"height":16}'
 ```
